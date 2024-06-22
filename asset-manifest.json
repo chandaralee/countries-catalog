@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/chandaralee/countries-catalog/static/css/main.5e1ea725.css",
+    "main.js": "/chandaralee/countries-catalog/static/js/main.955382fa.js",
+    "index.html": "/chandaralee/countries-catalog/index.html",
+    "main.5e1ea725.css.map": "/chandaralee/countries-catalog/static/css/main.5e1ea725.css.map",
+    "main.955382fa.js.map": "/chandaralee/countries-catalog/static/js/main.955382fa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5e1ea725.css",
+    "static/js/main.955382fa.js"
+  ]
+}
