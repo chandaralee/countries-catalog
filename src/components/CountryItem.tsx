@@ -19,13 +19,15 @@ const CountryItem: React.FC<CountryItemProps> = ({
         <img
           src={country.flag}
           alt={`Flag of ${country.officialName}`}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-fill"
         />
       </div>
       <h2 className="text-xl mt-2">{country.officialName}</h2>
-      <p className="truncate">
+      <p className="truncate text-gray-700">
         {country.cca2} / {country.cca3} ({country.callingCode})
       </p>
+      <p className="truncate text-gray-400">{country.altSpelling}</p>
+
     </div>
   );
 };

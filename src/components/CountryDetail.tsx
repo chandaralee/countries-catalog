@@ -29,7 +29,7 @@ const CountryDetails: React.FC<CountryDetailsProps> = ({
           <img
             src={country.flag}
             alt={`Flag of ${country.officialName}`}
-            className="absolute inset-0 w-full h-full object-cover text-center"
+            className="absolute inset-0 w-full h-full object-fill text-center"
           />
         </div>
         <p>
@@ -43,6 +43,10 @@ const CountryDetails: React.FC<CountryDetailsProps> = ({
         </p>
         <p>
           <strong>Continent(s):</strong> {country.continent}
+        </p>
+        <p>
+          <strong>Country Code: </strong>
+          {country.cca2} / {country.cca3}
         </p>
         <p>
           <strong>Language(s):</strong> {country.languages}

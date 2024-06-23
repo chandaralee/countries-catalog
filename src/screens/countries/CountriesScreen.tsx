@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
+import CountryDetails from "../../components/CountryDetail";
+import CountryList from "../../components/CountryList";
 import Header from "../../components/Header";
+import Pagination from "../../components/Pagination";
 import SearchBar from "../../components/SearchBar";
 import SortSelction from "../../components/SortSelection";
+import { ICountry } from "../../interfaces/country.interface";
 import { countryService } from "../../services";
 import { fuzzySearch } from "../../utils";
-import CountryList from "../../components/CountryList";
-import Pagination from "../../components/Pagination";
-import CountryDetails from "../../components/CountryDetail";
-import { ICountry } from "../../interfaces/country.interface";
+import BackdropLoading from "../../components/Loading/BackdropLoading";
 
 type IOrder = "asc" | "desc" | string;
 
@@ -18,10 +19,12 @@ const CountriesScreen: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<IOrder>("asc");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const countriesPerPage = 25;
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchCountriesData = async () => {
       const data = await countryService.getCountryList();
       setCountries(data);
@@ -30,6 +33,7 @@ const CountriesScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     const searchBy = ["officialName", "nativeName", "altSpelling"];
     let filtered: ICountry[] = fuzzySearch(countries, searchTerm, searchBy);
     filtered = filtered.sort((a, b) => {
@@ -40,7 +44,7 @@ const CountriesScreen: React.FC = () => {
       }
     });
     setFilteredCountries([...filtered]);
-
+    setIsLoading(false);
     return () => {
       setFilteredCountries([...filtered]);
     };
@@ -80,13 +84,14 @@ const CountriesScreen: React.FC = () => {
     <>
       <Header />
 
+      {isLoading && <BackdropLoading />}
+
       <div className="container mx-auto p-4">
         <SearchBar
           placeholder="Search by country name..."
           searchTerm={searchTerm}
           onSearchChange={handleSearchChange}
         />
-
         <SortSelction sortOrder={sortOrder} onSortChange={handleSortChange} />
 
         <CountryList
